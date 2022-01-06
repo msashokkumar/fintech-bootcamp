@@ -78,7 +78,7 @@ print(f"Remaining months on loan: {remaining_months_on_loan}")
 #   You'll want to use the **monthly** version of the present value formula.
 #   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
 
-loan_fair_value = loan_future_value / (1 + ((20/100)/12)) ** remaining_months_on_loan
+loan_fair_value = loan_future_value / ((1 + ((20/100)/12)) ** remaining_months_on_loan)
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
@@ -116,12 +116,12 @@ new_loan = {
 #    The function should return the `present_value` for the loan.
 
 def calculate_present_value(future_value, remaining_months, annual_discount_rate):
-    present_value = future_value / (1 + ((annual_discount_rate/100)/12)) ** remaining_months
+    present_value = future_value / ((1 + ((annual_discount_rate/100)/12)) ** remaining_months)
     return present_value
 
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
-present_value = calculate_present_value(new_loan.get("future_value"), new_loan.get("remaining_months"), 20)
+present_value = calculate_present_value(new_loan["future_value"], new_loan["remaining_months"], 20)
 print(f"The present value of the loan is: {present_value}")
 
 """Part 4: Conditionally filter lists of loans.
@@ -201,9 +201,4 @@ with open ("inexpensive_loans.csv", 'w') as csvfile:
     loanwriter.writerow(header)
 
     for i_loan in inexpensive_loans:
-        row = [i_loan.get("loan_price"),
-         i_loan.get("remaining_months"),
-         i_loan.get("repayment_interval"),
-         i_loan.get("future_value")
-        ]
-        loanwriter.writerow(row)
+        loanwriter.writerow(i_loan.values())
